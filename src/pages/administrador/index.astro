@@ -1,0 +1,105 @@
+---
+import Header from "../../components/Header.jsx";
+import { users } from "../../data/users.js";
+import { orders } from "../../data/orders.js";
+import { subsidyRequests } from "../../data/subsidies.js";
+import { forumPosts } from "../../data/posts.js";
+import ClientRouter from "astro/components/ClientRouter.astro";
+
+title: "Dashboard Administrador";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Administrador – AgroPrecision</title>
+
+    <!-- Global + Estilos específicos de administrador -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-administrador.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="administrador" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "administrador") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <div class="admin-layout">
+      <!-- Sidebar de navegación -->
+      <aside class="admin-sidebar">
+        <nav>
+          <ul>
+            <li><a href="/administrador/usuarios">Usuarios</a></li>
+            <li><a href="/administrador/pedidos">Pedidos</a></li>
+            <li><a href="/administrador/subsidios">Subsidios</a></li>
+            <li><a href="/administrador/auditoria">Auditoría</a></li>
+            <li><a href="/foro">Foro</a></li>
+          </ul>
+        </nav>
+      </aside>
+
+      <!-- Área principal de contenido -->
+      <main class="admin-content">
+        <section class="admin-header">
+          <h2>Bienvenido, Administrador</h2>
+        </section>
+
+        <!-- Grid de métricas principales -->
+        <section class="metrics-grid">
+          <div class="metric-card">
+            <h3>Total de Usuarios</h3>
+            <p class="metric-value">{users.length}</p>
+          </div>
+          <div class="metric-card">
+            <h3>Pedidos Pendientes</h3>
+            <p class="metric-value">{orders.filter(o => o.status !== "Enviado").length}</p>
+          </div>
+          <div class="metric-card">
+            <h3>Subsidios Pendientes</h3>
+            <p class="metric-value">{subsidyRequests.filter(r => r.status === "Pendiente").length}</p>
+          </div>
+          <div class="metric-card">
+            <h3>Consultas sin Responder</h3>
+            <p class="metric-value">{forumPosts.filter(p => p.responses.length === 0).length}</p>
+          </div>
+        </section>
+
+        <!-- Lista detallada de estadísticas -->
+        <section class="stats-list">
+          <div class="stats-card">
+            <h4>Desglose de Usuarios</h4>
+            <ul>
+              <li>Agricultores: {users.filter(u => u.role === "agricultor").length}</li>
+              <li>Proveedores: {users.filter(u => u.role === "proveedor").length}</li>
+              <li>Especialistas: {users.filter(u => u.role === "especialista").length}</li>
+              <li>Administradores: {users.filter(u => u.role === "administrador").length}</li>
+            </ul>
+          </div>
+          <div class="stats-card">
+            <h4>Pedidos</h4>
+            <p>{orders.length} totales – {orders.filter(o => o.status !== "Enviado").length} pendientes</p>
+          </div>
+          <div class="stats-card">
+            <h4>Solicitudes de Subsidio</h4>
+            <p>{subsidyRequests.length} totales – {subsidyRequests.filter(r => r.status === "Pendiente").length} pendientes</p>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

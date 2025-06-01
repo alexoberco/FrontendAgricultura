@@ -1,0 +1,76 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+import { orders } from "../../data/orders.js";
+import { products } from "../../data/products.js";
+
+// Cálculo de métricas para el proveedor
+const pendingOrders = orders.filter(o => o.status === "Pendiente").length;
+const totalProducts = products.length;
+const lowStock = products.filter(p => p.stock < 10).length;
+
+title: "Dashboard Proveedor";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Proveedor – AgroPrecision</title>
+
+    <!-- CSS global y específico para proveedor -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-proveedor.css" />
+
+    <!-- Scripts de desarrollo (Vite/Astro) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="proveedor" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "proveedor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor full-width con degradado azul -->
+    <div class="proveedor-container">
+      <h2>Bienvenido, Proveedor</h2>
+
+      <!-- Tarjeta blanca con estadísticas generales -->
+      <div class="proveedor-card">
+        <!-- Grid de mini-tarjetas -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Pedidos Pendientes</h3>
+            <p>{pendingOrders}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Productos en Catálogo</h3>
+            <p>{totalProducts}</p>
+          </div>
+          <div class="stat-card">
+            <h3>Bajo Stock (&lt;10)</h3>
+            <p>{lowStock}</p>
+          </div>
+        </div>
+
+        <!-- Enlaces rápidos (opcional) -->
+        <div class="quick-links-proveedor">
+          <a href="/proveedor/pedidos">Ver Pedidos</a>
+          <a href="/proveedor/inventario">Gestionar Inventario</a>
+          <a href="/foro">Ir al Foro</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

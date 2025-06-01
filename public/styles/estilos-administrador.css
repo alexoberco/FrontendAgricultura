@@ -1,0 +1,546 @@
+/* ===== Layout general ===== */
+.admin-layout {
+  display: flex;
+  background: #f4f9f4; /* Fondo muy suave para el área completa */
+  min-height: 100vh;
+}
+
+/* ===== Sidebar ===== */
+.admin-sidebar {
+  width: 220px;
+  background-color: #4caf50; /* Verde principal */
+  color: #ffffff;
+  padding-top: 2rem;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.admin-sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar nav ul li {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.admin-sidebar nav ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  display: block;
+  transition: background 0.2s;
+}
+
+.admin-sidebar nav ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* ===== Área de contenido principal ===== */
+.admin-content {
+  flex-grow: 1;
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ===== Cabecera de sección ===== */
+.admin-header h2 {
+  font-size: 2rem;
+  color: #2e7d32; /* Verde oscuro */
+  margin: 0;
+}
+
+/* ===== Grid de métricas principales ===== */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.metric-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+}
+
+.metric-card h3 {
+  font-size: 1.1rem;
+  color: #2e7d32;
+  margin-bottom: 0.75rem;
+}
+
+.metric-card .metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #388e3c; /* Verde medio */
+}
+
+/* ===== Lista de estadísticas detalladas ===== */
+.stats-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.stats-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.5rem;
+  flex: 1 1 280px;
+}
+
+.stats-card h4 {
+  font-size: 1.25rem;
+  color: #2e7d32;
+  margin-bottom: 0.75rem;
+}
+
+.stats-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.stats-card ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+  color: #333333;
+}
+
+.stats-card ul li:last-child {
+  border-bottom: none;
+}
+
+.stats-card p {
+  font-size: 1rem;
+  color: #555555;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 992px) {
+  .admin-content {
+    padding: 1.5rem 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 1rem 0;
+  }
+  .admin-sidebar nav ul li {
+    margin-bottom: 0.5rem;
+  }
+  .admin-content {
+    padding: 1rem 1.5rem;
+  }
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .stats-list {
+    flex-direction: column;
+  }
+}
+/* ===== Auditoría – contenedor principal ===== */
+.auditoria-container {
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #8bc34a, #aed581);
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título centrado */
+.auditoria-container h2 {
+  font-size: 1.75rem;
+  color: #2e7d32; /* Verde oscuro */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ===== Auditoría – tarjeta blanca ===== */
+.auditoria-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+/* ===== Auditoría – tabla ===== */
+.auditoria-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Garantiza scroll horizontal en pantallas estrechas */
+}
+
+/* Cabecera de tabla */
+.auditoria-table thead tr {
+  background-color: #2e7d32; /* Verde oscuro */
+  color: #ffffff;
+}
+
+.auditoria-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  position: sticky;
+  top: 0;
+}
+
+/* Celdas de cuerpo */
+.auditoria-table td {
+  padding: 0.75rem 1rem;
+  color: #333333;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+
+/* Filas alternas ligeramente sombreadas */
+.auditoria-table tbody tr:nth-child(even) {
+  background-color: #f9fdf9; /* Verde muy suave */
+}
+
+/* Hover sobre fila */
+.auditoria-table tbody tr:hover {
+  background-color: #e8f5e9;
+}
+
+/* Scroll horizontal para pantallas pequeñas */
+@media (max-width: 768px) {
+  .auditoria-card {
+    padding: 1rem;
+  }
+  .auditoria-table {
+    font-size: 0.9rem;
+  }
+}
+/* ===== Subsidios – contenedor principal ===== */
+.subsidios-container {
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #8bc34a, #aed581); /* Mismo degradado de Agricultor/Admin */  
+  padding: 2rem 1.5rem; /* Espacio alrededor */
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente */
+}
+
+/* Título centrado y destacado */
+.subsidios-title {
+  font-size: 1.75rem;
+  color: #2e7d32; /* Verde oscuro */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* ===== Subsidios – tarjeta con sombra ===== */
+.subsidios-card {
+  background: #ffffff; /* Blanco para resaltar sobre verde */
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  padding: 1.5rem;
+  overflow-x: auto; /* Permite scroll horizontal si es necesario */
+}
+
+/* Mensaje cuando no hay solicitudes */
+.no-requests {
+  font-size: 1rem;
+  color: #555555;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+/* ===== Subsidios – tabla de solicitudes ===== */
+.subsidios-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Garantiza scroll en pantallas pequeñas */
+}
+
+/* Cabecera de la tabla */
+.subsidios-table thead tr {
+  background-color: #2e7d32; /* Verde oscuro */
+  color: #ffffff;
+}
+
+.subsidios-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  position: sticky;
+  top: 0; /* Fija la cabecera al hacer scroll */
+  z-index: 1;
+}
+
+/* Filas de la tabla */
+.subsidios-table td {
+  padding: 0.75rem 1rem;
+  color: #333333;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+
+/* Filas alternas para legibilidad */
+.subsidios-table tbody tr:nth-child(even) {
+  background-color: #f9fdf9; /* Verde muy suave */
+}
+
+/* Hover que resalta la fila */
+.subsidios-table tbody tr:hover {
+  background-color: #e8f5e9; /* Verde claro de resaltado */
+}
+
+/* Botón “Aprobar”: estilo moderno con degradado */
+.btn-aprobar {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.btn-aprobar:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px); /* Efecto levitar ligeramente al pasar el cursor */
+}
+
+.btn-aprobar:active {
+  transform: translateY(1px);
+  background: linear-gradient(135deg, #2e7d32, #558b2f);
+}
+
+/* Estado “Completado” en lugar de botón */
+.estado-completado {
+  font-style: italic;
+  color: #777777;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .subsidios-card {
+    padding: 1rem;
+  }
+  .subsidios-table {
+    font-size: 0.9rem;
+  }
+}
+/* ===== Gestión de Usuarios – contenedor general ===== */
+.usuarios-container {
+  width: 100vw;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #8bc34a, #aed581); /* Mismo degradado verde */
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título de la sección */
+.usuarios-title {
+  font-size: 1.75rem;
+  color: #2e7d32; /* Verde oscuro */
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Tarjeta blanca para tabla de usuarios */
+.usuarios-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+
+/* Tabla de usuarios */
+.usuarios-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Scroll horizontal en móvil */
+}
+
+/* Cabecera de la tabla */
+.usuarios-table thead tr {
+  background-color: #2e7d32; /* Verde oscuro */
+  color: #ffffff;
+}
+
+.usuarios-table th {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Filas de la tabla */
+.usuarios-table td {
+  padding: 0.75rem 1rem;
+  color: #333333;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 0.95rem;
+}
+
+/* Filas alternas para legibilidad */
+.usuarios-table tbody tr:nth-child(even) {
+  background-color: #f9fdf9; /* Verde muy suave */
+}
+
+/* Hover en fila */
+.usuarios-table tbody tr:hover {
+  background-color: #e8f5e9;
+}
+
+/* Botón “Eliminar” (estilo secundario rojo suave) */
+.btn-eliminar {
+  background-color: #d32f2f; /* Rojo suave */
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.btn-eliminar:hover {
+  background-color: #b71c1c; /* Rojo más oscuro al pasar */
+  transform: translateY(-2px); 
+}
+
+.btn-eliminar:active {
+  transform: translateY(1px);
+  background-color: #880e4f; /* Tonalidad muy oscura para estado activo */
+}
+
+/* Tarjeta blanca para el formulario */
+.usuarios-form-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  padding: 1.5rem;
+  overflow: hidden;
+}
+
+/* Título pequeño dentro de la card de formulario */
+.usuarios-form-card h3 {
+  font-size: 1.25rem;
+  color: #2e7d32;
+  margin-bottom: 1rem;
+}
+
+/* Formulario de creación de usuario */
+.usuarios-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Grupo de cada campo */
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Etiquetas de formulario */
+.form-group label {
+  font-size: 1rem;
+  color: #555555;
+  margin-bottom: 0.5rem;
+}
+
+/* Inputs y selects */
+.usuarios-form input[type="text"],
+.usuarios-form input[type="email"],
+.usuarios-form select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.usuarios-form input:focus,
+.usuarios-form select:focus {
+  border-color: #4caf50; /* Verde medio al enfocar */
+}
+
+/* Botón “Crear Usuario” */
+.btn-crear {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.btn-crear:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.btn-crear:active {
+  transform: translateY(1px);
+  background: linear-gradient(135deg, #2e7d32, #558b2f);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .usuarios-card,
+  .usuarios-form-card {
+    padding: 1rem;
+  }
+  .usuarios-table {
+    font-size: 0.9rem;
+  }
+  .usuarios-container {
+    padding: 1rem;
+  }
+}
+

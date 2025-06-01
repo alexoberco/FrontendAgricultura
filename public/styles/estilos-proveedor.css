@@ -1,0 +1,349 @@
+/* estilos-proveedor.css */
+
+/* ===== Contenedor full-width con degradado verde (mismo que agricultor) ===== */
+.proveedor-container {
+  width: 100vw;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #8bc34a, #aed581);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título centrado con color verde oscuro */
+.proveedor-container h2 {
+  font-size: 1.75rem;
+  color: #2e7d32; /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Tarjeta blanca para las estadísticas */
+.proveedor-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Grid de mini tarjetas con los tres contadores */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Cada mini-tarjeta */
+.stat-card {
+  background: #f1f8e9;   /* Verde muy suave */
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card h3 {
+  font-size: 1.25rem;
+  color: #2e7d32; /* Verde oscuro */
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #558b2f; /* Verde medio */
+}
+
+/* Lista de estadísticas (opcional, debajo de las tarjetas) */
+.proveedor-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0 0;
+}
+
+.proveedor-card li {
+  font-size: 1.1rem;
+  color: #212121;
+  margin: 0.75rem 0;
+}
+
+.proveedor-card li strong {
+  color: #2e7d32; /* Verde oscuro */
+}
+
+/* Botones rápidos en el dashboard (verde) */
+.quick-links-proveedor {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.quick-links-proveedor a {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.quick-links-proveedor a:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .proveedor-container {
+    padding: 2rem 1rem;
+  }
+  .proveedor-card {
+    padding: 1.5rem;
+  }
+  .stat-card h3 {
+    font-size: 1.1rem;
+  }
+  .stat-card p {
+    font-size: 1.5rem;
+  }
+  .quick-links-proveedor a {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* ===== Estilos para “Pedidos de Clientes” (Proveedor) ===== */
+
+/* Contenedor de la sección de pedidos */
+.pedidos-container {
+  width: 100vw;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #8bc34a, #aed581); /* mismo degradado verde */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título centrado con el verde oscuro */
+.pedidos-container h2 {
+  font-size: 1.75rem;
+  color: #2e7d32; /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Tarjeta blanca que envuelve la tabla de pedidos */
+.pedidos-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  width: 100%;
+  max-width: 1000px;
+  padding: 1.5rem;
+}
+
+/* Estilos generales para la tabla (heredados de global.css, pero dentro de la tarjeta) */
+.pedidos-card .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+/* Encabezados de tabla */
+.pedidos-card .table th {
+  background-color: #e8f5e9; /* Verde muy suave */
+  color: #2e7d32;            /* Verde oscuro */
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border: 1px solid #c8e6c9;
+}
+
+/* Celdas de la tabla */
+.pedidos-card .table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  color: #555555; /* Gris medio */
+  vertical-align: top;
+}
+
+/* Lista dentro de la celda de “Productos” */
+.pedidos-card td ul {
+  list-style: disc inside;
+  margin: 0.5rem 0;
+  padding-left: 1rem;
+}
+
+.pedidos-card td ul li {
+  margin: 0.25rem 0;
+}
+
+/* Botón “Marcar Enviado” */
+.pedidos-card .btn {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.pedidos-card .btn:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.pedidos-card .btn:active {
+  transform: translateY(1px);
+}
+
+/* Mensaje de “Completado” */
+.pedidos-completado {
+  color: #777777;
+  font-style: italic;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .pedidos-card {
+    padding: 1rem;
+  }
+  .pedidos-card .table th,
+  .pedidos-card .table td {
+    padding: 0.5rem;
+    font-size: 0.95rem;
+  }
+  .pedidos-card .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+/* ===== Estilos para “Gestionar Inventario” (Proveedor) ===== */
+
+/* Contenedor con degradado verde, centrado */
+.inventario-container {
+  width: 100vw;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #8bc34a, #aed581);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título centrado con verde oscuro */
+.inventario-container h2 {
+  font-size: 1.75rem;
+  color: #2e7d32;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Tarjeta blanca que envuelve la tabla de inventario */
+.inventario-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 1000px;
+  padding: 1.5rem;
+  overflow-x: auto; /* Permite scroll horizontal en pantallas pequeñas */
+}
+
+/* Estilos para la tabla dentro de la tarjeta */
+.inventario-card .table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+/* Encabezados de tabla */
+.inventario-card .table th {
+  background-color: #e8f5e9; /* Verde muy suave */
+  color: #2e7d32;            /* Verde oscuro */
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  border: 1px solid #c8e6c9;
+  text-align: left;
+}
+
+/* Celdas de la tabla */
+.inventario-card .table td {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e0e0e0;
+  color: #555555;
+  vertical-align: middle;
+}
+
+/* Input numérico para stock */
+.inventario-input {
+  width: 4rem;
+  padding: 0.25rem;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  text-align: center;
+  margin-right: 0.5rem;
+}
+
+/* Botón “Actualizar” en la tabla */
+.inventario-card .btn {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  padding: 0.45rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.inventario-card .btn:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.inventario-card .btn:active {
+  transform: translateY(1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .inventario-card {
+    padding: 1rem;
+  }
+  .inventario-card .table th,
+  .inventario-card .table td {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+  .inventario-input {
+    width: 3.5rem;
+  }
+  .inventario-card .btn {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+

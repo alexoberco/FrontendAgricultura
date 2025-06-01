@@ -1,0 +1,96 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+import { orders } from "../../data/orders.js";
+title: "Pedidos de Clientes";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedidos de Clientes – AgroPrecision</title>
+
+    <!-- Carga de estilos: global para header y reset, + específico de proveedor -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-proveedor.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="proveedor" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "proveedor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor principal con degradado verde -->
+    <div class="pedidos-container">
+      <h2>Pedidos de Clientes</h2>
+
+      <!-- Tarjeta blanca que envuelve la tabla -->
+      <div class="pedidos-card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID Pedido</th>
+              <th>Agricultor</th>
+              <th>Productos</th>
+              <th>Estado</th>
+              <th>Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr>
+                <td>#{order.id}</td>
+                <td>{order.farmerName}</td>
+                <td>
+                  <ul>
+                    {order.items.map((item) => (
+                      <li>
+                        {item.name} x {item.qty}
+                      </li>
+                    ))}
+                  </ul>
+                </td>
+                <td>{order.status}</td>
+                <td>
+                  {order.status !== "Enviado" ? (
+                    <button
+                      class="btn"
+                      onclick={`marcarEnviado(${order.id})`}
+                    >
+                      Marcar Enviado
+                    </button>
+                  ) : (
+                    <span class="pedidos-completado">Completado</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      /** @param {number} id */
+      function marcarEnviado(id: string) {
+        alert("Pedido " + id + " marcado como Enviado (simulado)");
+        // En producción actualizaría el estado a "Enviado" en la base de datos
+      }
+    </script>
+  </body>
+</html>

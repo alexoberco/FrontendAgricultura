@@ -1,0 +1,585 @@
+/* estilos-agricultor.css */
+
+/* ===== Resets y tipografía básica ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #8bc34a, #aed581); /* Igual que el login }*/
+  color: #1b5e20; /* Verde oscuro para texto */
+  overflow-x: hidden;
+}
+
+/* Contenedor general centrado */
+.container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  min-height: 100vh;  
+}
+
+
+/* ===== Tarjeta principal de Dashboard ===== */
+.dashboard-card {
+  background: #ffffff; /* Blanco puro */
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 1000px;
+  padding: 2rem;
+  margin-top: 2rem;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+/* Sutil degradado interno */
+.dashboard-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(135deg, rgba(139,195,74,0.15), rgba(174,213,129,0.15)); 
+  pointer-events: none;
+}
+
+/* Título de la tarjeta */
+.dashboard-card h2 {
+  color: #2e7d32;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  z-index: 1;
+  position: relative;
+}
+
+/* Contenedor de estadísticas en mini-cards */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Mini-card individual */
+.stat-card {
+  background: #f1f8e9; /* Verde muy suave */
+  border: 1px solid #c8e6c9;
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+}
+
+.stat-card h3 {
+  font-size: 1.25rem;
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.stat-card p {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #558b2f; /* Verde medio */
+}
+
+/* Enlaces rápidos dentro del dashboard (botones) */
+.quick-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+}
+
+.quick-links a {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #fff;
+  text-decoration: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.quick-links a:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+/* ===== Estilos responsivos ===== */
+@media (max-width: 768px) {
+  .dashboard-card {
+    padding: 1rem;
+  }
+  .dashboard-card h2 {
+    font-size: 1.5rem;
+  }
+  .stat-card h3 {
+    font-size: 1rem;
+  }
+  .stat-card p {
+    font-size: 1.5rem;
+  }
+  .quick-links a {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.products-container {
+  width: 100vw;           /* Ocupa todo el ancho de la ventana */
+  padding: 2rem;          /* Un poco de espacio alrededor */
+  background: none;       /* Ya el body tiene gradiente; no pongas fondo adicional */
+  box-sizing: border-box;
+  padding: 2rem 1.5rem;
+}
+
+/* Título centrado y con margen inferior */
+.products-container .section-title {
+  font-size: 1.5rem;
+  color: #2e7d32;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Grid de productos full-width ===== */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Tarjeta de producto individual (sin cambios adicionales) */
+.product-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+}
+
+.product-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.product-info {
+  padding: 1rem;
+}
+
+.product-info h3 {
+  font-size: 1.25rem;
+  color: #2e7d32;
+  margin-bottom: 0.5rem;
+}
+
+.product-info .description {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.product-info .price-stock {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.product-info .price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #388e3c;
+}
+
+.product-info .stock {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.product-info .rating {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 1rem;
+}
+
+/* Botón “Agregar al carrito” */
+.btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.btn:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .product-image {
+    height: 140px;
+  }
+  .product-info h3 {
+    font-size: 1.1rem;
+  }
+  .product-info .price {
+    font-size: 1rem;
+  }
+  .product-info .stock,
+  .product-info .rating {
+    font-size: 0.85rem;
+  }
+}
+
+/* Contenedor full-width con padding horizontal */
+.pedidos-container {
+  width: 100vw;                 /* Ocupa todo el ancho de la ventana */
+  padding: 2rem 1.5rem;         /* 2rem arriba/abajo, 1.5rem izquierda/derecha */
+  box-sizing: border-box;
+}
+
+/* Título centrado y con margen inferior */
+.pedidos-container .section-title {
+  font-size: 1.5rem;
+  color: #2e7d32;               /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjeta blanca para la tabla */
+.table-container {
+  background: #ffffff;                                /* Blanco puro */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);          /* Sombra sutil */
+  overflow-x: auto;                                   /* Scroll horizontal si hace falta */
+  margin: 0 auto;                                     /* Centrar horizontalmente */
+  max-width: 1000px;                                  /* Ancho máximo razonable */
+}
+
+/* Estilo base para <table> */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;                                   /* Asegura legibilidad en pantallas pequeñas */
+}
+
+/* Encabezados de columna */
+.table-container th {
+  background-color: #e8f5e9;                          /* Verde muy suave */
+  color: #2e7d32;                                     /* Verde oscuro */
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 2px solid #c8e6c9;
+}
+
+/* Celdas de datos */
+.table-container td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e0e0e0;                    /* Línea divisoria clara */
+  vertical-align: top;
+  color: #555;
+}
+
+/* Filas con hover */
+.table-container tbody tr:hover {
+  background-color: #f1f8e9;                           /* Fondo verde muy suave al pasar el ratón */
+}
+
+/* Lista de productos dentro de la celda */
+.table-container td ul {
+  list-style: disc inside;
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+
+.table-container td ul li {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Mensaje cuando no hay pedidos */
+.pedidos-container p {
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  padding: 2rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  /* Reduce padding lateral del contenedor */
+  .pedidos-container {
+    padding: 2rem 1rem;
+  }
+
+  /* Ajusta padding de celdas */
+  .table-container th,
+  .table-container td {
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Lista más compacta */
+  .table-container td ul {
+    padding-left: 1rem;
+  }
+
+  /* Fuente ligeramente menor en tablas */
+  .table-container td,
+  .table-container th {
+    font-size: 0.9rem;
+  }
+}
+
+.sensores-container {
+  width: 100vw;                 
+  padding: 2rem 1.5rem;          /* 2rem arriba/abajo, 1.5rem izquierda/derecha */
+  box-sizing: border-box;
+}
+
+/* Título centrado y con margen inferior */
+.sensores-container .section-title {
+  font-size: 1.5rem;
+  color: #2e7d32;               /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjeta blanca para el contenido de sensores */
+.sensores-card {
+  background: #ffffff;                                /* Blanco puro */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);          /* Sombra sutil */
+  overflow: hidden;
+  margin: 0 auto;                                     /* Centrar horizontalmente */
+  max-width: 1000px;                                  /* Ancho máximo razonable */
+  padding: 1.5rem;
+}
+
+/* Párrafo descriptivo dentro de la tarjeta */
+.sensores-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Área donde el componente IoTMonitor renderiza su contenido */
+.iot-monitor-wrapper {
+  width: 100%;
+  min-height: 300px;        /* Altura mínima para que no parezca vacío */
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .sensores-container {
+    padding: 2rem 1rem;
+  }
+  .sensores-card {
+    padding: 1rem;
+  }
+  .sensores-card p {
+    font-size: 0.9rem;
+  }
+}
+
+.reportes-container {
+  width: 100vw;                 
+  padding: 2rem 1.5rem;          /* 2rem arriba/abajo, 1.5rem lados */
+  box-sizing: border-box;
+}
+
+/* Título centrado y con margen inferior */
+.reportes-container .section-title {
+  font-size: 1.5rem;
+  color: #2e7d32;               /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjeta blanca para el contenido de reportes */
+.reportes-card {
+  background: #ffffff;                                
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);          /* Sombra sutil */
+  overflow: hidden;
+  margin: 0 auto;                                      /* Centrar horizontalmente */
+  max-width: 1000px;                                   /* Ancho máximo razonable */
+  padding: 1.5rem;
+}
+
+/* Párrafo descriptivo dentro de la tarjeta */
+.reportes-card p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* Wrapper para el componente AIRecommender */
+.ai-recommender-wrapper {
+  width: 100%;
+  min-height: 300px;        /* Altura mínima para que no parezca vacío */
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .reportes-container {
+    padding: 2rem 1rem;
+  }
+  .reportes-card {
+    padding: 1rem;
+  }
+  .reportes-card p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Contenedor full-width con padding lateral */
+.asesoria-container {
+  width: 100vw;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #8bc34a, #aed581);
+}
+
+/* Título centrado y con margen inferior */
+.asesoria-container .section-title {
+  font-size: 1.5rem;
+  color: #2e7d32;   /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Tarjeta blanca para el formulario */
+.asesoria-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  margin: 0 auto;
+  max-width: 1000px;
+  padding: 1.5rem;
+}
+
+/* Párrafo descriptivo */
+.asesoria-card p {
+  font-size: 1rem;
+  color: #555555;
+  margin-bottom: 1rem;
+}
+
+/* Estilos para el formulario */
+.asesoria-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.asesoria-card label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  color: #2e7d32;
+  font-size: 1rem;
+}
+
+.asesoria-card textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 120px;
+  border: 1px solid #c8e6c9;
+  border-radius: 6px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #333333;
+  transition: border-color 0.3s;
+}
+
+.asesoria-card textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Botón “Enviar Consulta” */
+.asesoria-card .btn {
+  width: fit-content;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.asesoria-card .btn:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.asesoria-card .btn:active {
+  transform: translateY(1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .asesoria-container {
+    padding: 2rem 1rem;
+  }
+  .asesoria-card {
+    padding: 1rem;
+  }
+  .asesoria-card p,
+  .asesoria-card label {
+    font-size: 0.95rem;
+  }
+  .asesoria-card textarea {
+    padding: 0.5rem;
+  }
+  .asesoria-card .btn {
+    width: 100%;
+    text-align: center;
+  }
+}

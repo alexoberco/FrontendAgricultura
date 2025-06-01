@@ -1,0 +1,61 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+import { logs } from "../../data/logs.js";
+title: "Auditoría";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auditoría – AgroPrecision</title>
+
+    <!-- Carga CSS global + admin (incluye ahora reglas de auditoría) -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-administrador.css" />
+
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="administrador" />
+
+    <!-- Validación de rol -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "administrador") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor principal con degradado verde -->
+    <div class="auditoria-container">
+      <h2>Registro de Actividad (Auditoría)</h2>
+
+      <div class="auditoria-card">
+        <table class="auditoria-table">
+          <thead>
+            <tr>
+              <th>Fecha / Hora</th>
+              <th>Evento</th>
+            </tr>
+          </thead>
+          <tbody>
+            {logs.map((entry) => (
+              <tr>
+                <td>{entry.timestamp}</td>
+                <td>{entry.message}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

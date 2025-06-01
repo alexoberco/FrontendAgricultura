@@ -1,0 +1,101 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+import { techQueries } from "../../data/queries.js";
+title: "Consultas Técnicas";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Consultas Técnicas – AgroPrecision</title>
+
+    <!-- Carga de estilos: global para header + específicos de especialista -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-especialista.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="especialista" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "especialista") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor principal con degradado verde -->
+    <div class="especialista-container">
+      <h2>Consultas Técnicas de Agricultores</h2>
+
+      <!-- Tarjeta blanca que envuelve la lista -->
+      <div class="especialista-card">
+        {techQueries.length === 0 ? (
+          <p class="no-consultas">No hay consultas pendientes.</p>
+        ) : (
+          <ul>
+            {techQueries.map((q) => (
+              <li>
+                <div>
+                  <strong>{q.farmerName} pregunta:</strong> {q.question}
+                </div>
+
+                {q.status === "Pendiente" ? (
+                  <div class="respuesta-container">
+                    <textarea
+                      class="respuesta-text"
+                      id={`respuesta-${q.id}`}
+                      placeholder="Escribe aquí tu respuesta..."
+                    ></textarea>
+                    <button
+                      class="enviar-respuesta"
+                      onclick={`enviarRespuesta('${q.id}')`}
+                    >
+                      Enviar Respuesta
+                    </button>
+                  </div>
+                ) : (
+                  <span class="badge">Respondida</span>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+
+    <script>
+      /**
+       * @param {string} id
+       */
+      function enviarRespuesta(id: string) {
+        const textarea = document.getElementById(`respuesta-${id}`);
+        if (!textarea) return;
+
+        const texto = (textarea as HTMLTextAreaElement).value.trim();
+        if (!texto) {
+          alert("Debes escribir una respuesta antes de enviar.");
+          return;
+        }
+
+        alert(
+          "Respuesta enviada para consulta " + id + ":\n\n" + texto + "\n\n(Simulado)"
+        );
+        // Aquí, en producción, se invocaría la API para marcar la consulta como respondida
+        // y guardar el contenido de `texto`.
+        (textarea as HTMLTextAreaElement).value = ""; // Limpiar el campo tras el envío
+      }
+    </script>
+  </body>
+</html>

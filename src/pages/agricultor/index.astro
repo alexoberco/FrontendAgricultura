@@ -1,0 +1,74 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header";
+title: "Dashboard Agricultor";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Agricultor – AgroPrecision</title>
+
+    <!-- CSS global y estilos específicos -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-agricultor.css" />
+
+    <!-- Vite/Astro dev toolbar -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="agricultor" />
+
+    <!-- Validación de rol -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "agricultor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenido principal -->
+    <div class="container">
+      <div class="dashboard-card">
+        <h2>Panel de Control</h2>
+
+        <!-- Mini-cards con estadísticas -->
+        <div class="stats-container">
+          <div class="stat-card">
+            <h3>Sensores Activos</h3>
+            <p>1</p>
+          </div>
+          <div class="stat-card">
+            <h3>Última Alerta</h3>
+            <p>Ninguna</p>
+          </div>
+          <div class="stat-card">
+            <h3>Recomendación</h3>
+            <p>–</p>
+          </div>
+          <div class="stat-card">
+            <h3>Pedidos Pendientes</h3>
+            <p>0</p>
+          </div>
+        </div>
+
+        <!-- Enlaces rápidos al resto de secciones -->
+        <div class="quick-links">
+          <a href="/agricultor/tienda">Tienda</a>
+          <a href="/agricultor/pedidos">Mis Pedidos</a>
+          <a href="/agricultor/sensores">Monitoreo IoT</a>
+          <a href="/agricultor/reportes">Reportes IA</a>
+          <a href="/agricultor/asesoria">Asesoría Técnica</a>
+          <a href="/foro">Foro</a>
+          <a href="/subsidios">Subsidios</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,68 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../components/Header.jsx";
+import { subsidyPrograms } from "../data/subsidies.js";
+title: "Subsidios Disponibles";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Subsidios Disponibles – AgroPrecision</title>
+
+    <!-- Solo global.css (contiene header, .subsidios-container, .subsidios-card, .btn, etc.) -->
+    <link rel="stylesheet" href="/styles/global.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="any" />
+
+    <!-- Validación de rol opcional (esta página es "any") -->
+    <!-- <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role) {
+          window.location.href = "/login";
+        }
+      })();
+    </script> -->
+
+    <!-- Contenedor con degradado verde para la sección de Subsidios -->
+    <div class="subsidios-container">
+      <h2>Subsidios Disponibles</h2>
+
+      <!-- Tarjeta que envuelve la lista de programas -->
+      <div class="subsidios-card">
+        <ul class="subsidios-list">
+          {subsidyPrograms.map((prog) => (
+            <li class="subsidio-item">
+              <div class="subsidio-info">
+                <strong>{prog.name}:</strong> {prog.description}
+              </div>
+              <button class="btn" onclick={`solicitar(${prog.id})`}>
+                Solicitar
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <p class="subsidios-note">
+          <em>*Simulación:</em> Al hacer clic en “Solicitar”, se registraría la solicitud de subsidio correspondiente.
+        </p>
+      </div>
+    </div>
+
+    <script>
+      function solicitar(programId: string) {
+        alert("Has solicitado el subsidio del programa ID: " + programId + " (simulado)");
+      }
+    </script>
+  </body>
+</html>

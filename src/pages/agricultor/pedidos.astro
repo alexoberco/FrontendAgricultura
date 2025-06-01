@@ -1,0 +1,80 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+import { orders } from "../../data/orders.js";
+
+// Filtrar pedidos del agricultor actual (ejemplo: “Alice”)
+const myOrders = orders.filter((o) => o.farmerName === "Alice");
+title: "Mis Pedidos";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mis Pedidos – AgroPrecision</title>
+
+    <!-- CSS global y específico -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-agricultor.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React, pasando el rol -->
+    <Header client:load role="agricultor" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "agricultor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor full-width para "Mis Pedidos" -->
+    <div class="pedidos-container">
+      <h2 class="section-title">Mis Pedidos</h2>
+
+      <div class="table-container">
+        {myOrders.length === 0 ? (
+          <p>No ha realizado pedidos aún.</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>ID Pedido</th>
+                <th>Productos</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              {myOrders.map((order) => (
+                <tr>
+                  <td>#{order.id}</td>
+                  <td>
+                    <ul>
+                      {order.items.map((item) => (
+                        <li>
+                          {item.name} – Cantidad: {item.qty} – Precio: $
+                          {(item.price * item.qty).toFixed(2)}
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>{order.status}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+  </body>
+</html>

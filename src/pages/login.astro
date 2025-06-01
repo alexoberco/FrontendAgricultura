@@ -1,0 +1,84 @@
+---
+import { ClientRouter } from "astro:transitions";
+import { users } from "../data/users.js";
+title: "Login";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - AgroPrecision</title>
+    <link rel="stylesheet" href="/styles/login.css" />
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="login-card">
+        <h2>AgroPrecision – Iniciar Sesión</h2>
+        <form id="loginForm">
+          <div class="input-group">
+            <input type="text" id="username" placeholder=" " required />
+            <label for="username">Usuario</label>
+          </div>
+          <div class="input-group">
+            <input type="password" id="password" placeholder=" " required />
+            <label for="password">Contraseña</label>
+          </div>
+          <button type="submit" class="btn-login">Iniciar Sesión</button>
+          <p id="errorMsg" class="error-message"></p>
+        </form>
+        <div class="links">
+          <a href="#" class="link-action">¿Olvidaste tu contraseña?</a>
+          <a href="/register" class="link-action">Regístrate</a>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" set:html={`
+      // Aquí inyectamos el JSON.stringify(users) EXACTAMENTE con \${…}
+      const users = ${JSON.stringify(users)};
+
+      const loginForm = document.getElementById("loginForm");
+      const errorMsg  = document.getElementById("errorMsg");
+
+      loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const enteredUser = document.getElementById("username").value.trim();
+        const enteredPass = document.getElementById("password").value;
+
+        const found = users.find(
+          (u) =>
+            u.name.toLowerCase() === enteredUser.toLowerCase() &&
+            u.password === enteredPass
+        );
+
+        if (found) {
+          localStorage.setItem("userName", found.name);
+          localStorage.setItem("role", found.role);
+
+          switch (found.role) {
+            case "agricultor":
+              window.location.href = "/agricultor";
+              break;
+            case "proveedor":
+              window.location.href = "/proveedor";
+              break;
+            case "especialista":
+              window.location.href = "/especialista";
+              break;
+            case "administrador":
+              window.location.href = "/administrador";
+              break;
+            default:
+              window.location.href = "/login";
+          }
+        } else {
+          errorMsg.textContent = "Usuario o contraseña incorrectos.";
+        }
+      });
+    `}></script>
+  </body>
+</html>

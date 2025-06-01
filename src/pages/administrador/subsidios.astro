@@ -1,0 +1,96 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";  
+import { subsidyRequests, subsidyPrograms } from "../../data/subsidies.js";  
+
+const requests = subsidyRequests.map(req => {  
+  const prog = subsidyPrograms.find(p => p.id === req.programId);  
+  return {  
+    ...req,  
+    programName: prog ? prog.name : `Programa ${req.programId}`,  
+  };  
+});  
+title: "Solicitudes de Subsidio";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Solicitudes de Subsidio – AgroPrecision</title>
+
+    <!-- Estilos globales y específicos del administrador -->
+    <link rel="stylesheet" href="/styles/global.css" />  
+    <link rel="stylesheet" href="/styles/estilos-administrador.css" />  
+
+    <script type="module" src="/@vite/client"></script>  
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React, muestra menú según rol -->
+    <Header client:load role="administrador" />  
+
+    <!-- Validación de rol (JavaScript en cliente) -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "administrador") {
+          window.location.href = "/login";  /* Redirige si no es administrador */  
+        }
+      })();
+    </script>
+
+    <!-- Contenedor principal con fondo degradado verde -->
+    <div class="subsidios-container">
+      <h2 class="subsidios-title">Solicitudes de Subsidio</h2>
+
+      <!-- Tarjeta blanca que envuelve la tabla -->
+      <div class="subsidios-card">
+        {requests.length === 0 ? (
+          <p class="no-requests">No hay solicitudes de subsidio pendientes.</p>  
+        ) : (
+          <table class="subsidios-table">
+            <thead>
+              <tr>
+                <th>ID Solicitud</th>
+                <th>Agricultor</th>
+                <th>Programa</th>
+                <th>Estado</th>
+                <th>Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              {requests.map((r) => (
+                <tr>
+                  <td>{r.id}</td>
+                  <td>{r.farmerName}</td>
+                  <td>{r.programName}</td>
+                  <td>{r.status}</td>
+                  <td>
+                    {r.status === "Pendiente" ? (
+                      <button class="btn-aprobar" onclick={`aprobarSubsidio(${r.id})`}>
+                        Aprobar
+                      </button>
+                    ) : (
+                      <em class="estado-completado">Completado</em>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+    </div>
+
+    <!-- Script para acción al pulsar "Aprobar" -->
+    <script>
+      function aprobarSubsidio(id: string) {
+        alert("Subsidio " + id + " aprobado (simulado)");  /* Feedback inmediato */  
+        // En un entorno real, se actualizaría el estado en la base de datos :contentReference[oaicite:1]{index=1}
+      }
+    </script>
+  </body>
+</html>

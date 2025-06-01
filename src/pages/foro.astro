@@ -1,0 +1,64 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../components/Header.jsx";
+import { forumPosts } from "../data/posts.js";
+title: "Foro";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Foro de Discusión – AgroPrecision</title>
+
+    <!-- Solo global.css (contiene .foro-container, .foro-card, .response, etc.) -->
+    <link rel="stylesheet" href="/styles/global.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header visible a todos -->
+    <Header client:load role="any" />
+
+    <!-- Contenedor full-width para el foro -->
+    <div class="foro-container">
+      <h2>Foro de Discusión</h2>
+
+      <div class="section">
+        {forumPosts.map((post) => (
+          <!-- Cada publicación principal como tarjeta verde clara -->
+          <div class="foro-card">
+            <p>
+              <strong>
+                {post.author} ({post.role}) pregunta:
+              </strong>{" "}
+              {post.question}
+            </p>
+
+            {post.responses.length > 0 ? (
+              post.responses.map((res) => (
+                <!-- Cada respuesta anidada dentro de una tarjeta response -->
+                <div class="foro-card response">
+                  <p>
+                    <strong>
+                      {res.author} ({res.role}):
+                    </strong>{" "}
+                    {res.answer}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p class="foro-empty">
+                <em>Aún no hay respuestas.</em>
+              </p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </body>
+</html>

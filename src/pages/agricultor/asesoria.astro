@@ -1,0 +1,76 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+title: "Asesoría Técnica";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asesoría Técnica – AgroPrecision</title>
+
+    <!-- CSS global y específico para agricultor (contiene .asesoria-container, .asesoria-card, etc.) -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-agricultor.css" />
+
+    <!-- Scripts de desarrollo (Vite/Astro) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+   
+  </head>
+
+  <body>
+    <!-- Header como isla React, sin MainLayout -->
+    <Header client:load role="agricultor" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "agricultor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor full-width con degradado verde -->
+    <div class="asesoria-container">
+      <h2 class="section-title">Asesoría Técnica Personalizada</h2>
+
+      <!-- Tarjeta blanca para el formulario -->
+      <div class="asesoria-card">
+        <p>
+          Complete el siguiente formulario para enviar su consulta a un
+          especialista:
+        </p>
+        <form onsubmit="enviarConsulta(event)">
+          <label>
+            Pregunta:<br />
+            <textarea id="consultaTexto" rows="4" cols="50" required></textarea>
+          </label>
+          <button type="submit" class="btn">Enviar Consulta</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function enviarConsulta(e: { preventDefault: () => void; }) {
+        e.preventDefault();
+        const consultaElem = document.getElementById("consultaTexto");
+        if (
+          consultaElem &&
+          (consultaElem as HTMLTextAreaElement).value.trim() !== ""
+        ) {
+          alert(
+            "Consulta enviada: " +
+              (consultaElem as HTMLTextAreaElement).value +
+              "\n(Respuesta pendiente de un especialista)"
+          );
+          (consultaElem as HTMLTextAreaElement).value = "";
+        }
+      }
+    </script>
+  </body>
+</html>

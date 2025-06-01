@@ -1,0 +1,92 @@
+---
+import ClientRouter from "astro/components/ClientRouter.astro";
+import Header from "../../components/Header.jsx";
+import { products } from "../../data/products.js";
+title: "Inventario";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inventario – AgroPrecision</title>
+
+    <!-- Carga de estilos: global para header y base, + específico de proveedor -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-proveedor.css" />
+
+    <!-- Vite/Astro Dev Toolbar (solo en desarrollo) -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="proveedor" />
+
+    <!-- Validación de rol en cliente -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "proveedor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor principal con degradado verde -->
+    <div class="inventario-container">
+      <h2>Gestionar Inventario</h2>
+
+      <!-- Tarjeta blanca que envuelve la tabla -->
+      <div class="inventario-card">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Stock Actual</th>
+              <th>Actualizar Stock</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((prod) => (
+              <tr>
+                <td>{prod.name}</td>
+                <td>{prod.stock}</td>
+                <td>
+                  <input
+                    type="number"
+                    id={"stock-" + prod.id}
+                    min="0"
+                    value={prod.stock}
+                    class="inventario-input"
+                  />
+                  <button
+                    class="btn"
+                    onclick={`updateStock(${prod.id})`}
+                  >
+                    Actualizar
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      /** @param {number} id */
+      function updateStock(id: string) {
+        const input = document.getElementById("stock-" + id);
+        if (!input) return;
+        const nuevo = (input as HTMLInputElement).value;
+        alert(
+          "Nuevo stock para producto " + id + ": " + nuevo + " unidades (simulado)"
+        );
+        // En producción se llamaría a la API para guardar el nuevo stock
+      }
+    </script>
+  </body>
+</html>

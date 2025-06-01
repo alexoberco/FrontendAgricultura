@@ -1,0 +1,84 @@
+---
+import { ClientRouter } from "astro:transitions";
+---
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - AgroPrecision</title>
+    <!-- Carga del CSS específico de registro -->
+    <link rel="stylesheet" href="/styles/register.css" />
+    <!-- Hidrata las transiciones de Astro si se necesitan -->
+    <ClientRouter />
+  </head>
+  <body>
+    <div class="register-container">
+      <div class="register-card">
+        <h2>AgroPrecision – Registro</h2>
+        <form id="registerForm">
+          <!-- Nombre de Usuario -->
+          <div class="input-group">
+            <input type="text" id="newUsername" placeholder=" " required />
+            <label for="newUsername">Nombre de Usuario</label>
+          </div>
+          <!-- Correo Electrónico -->
+          <div class="input-group">
+            <input type="email" id="newEmail" placeholder=" " required />
+            <label for="newEmail">Correo Electrónico</label>
+          </div>
+          <!-- Contraseña -->
+          <div class="input-group">
+            <input
+              type="password"
+              id="newPassword"
+              placeholder=" "
+              required
+            />
+            <label for="newPassword">Contraseña</label>
+          </div>
+          <!-- Selección de Rol -->
+          <div class="input-group select-group">
+            <select id="newRole" required>
+              <option value="" disabled selected></option>
+              <option value="agricultor">Agricultor</option>
+              <option value="proveedor">Proveedor</option>
+              <option value="especialista">Especialista</option>
+              <option value="administrador">Administrador</option>
+            </select>
+            <label for="newRole">Rol</label>
+          </div>
+          <!-- Botón de Registro -->
+          <button type="submit" class="btn-register">Registrarse</button>
+          <!-- Enlaces de ayuda -->
+          <div class="links">
+            <a href="/login" class="link-action">¿Ya tienes cuenta? Inicia Sesión</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script type="module">
+      document.getElementById("registerForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const username = document.getElementById("newUsername").value.trim();
+        const email = document.getElementById("newEmail").value.trim();
+        const password = document.getElementById("newPassword").value;
+        const role = document.getElementById("newRole").value;
+
+        if (!username || !email || !password || !role) return;
+
+        // Simulación de guardado en localStorage. En un backend real
+        // se enviaría a la API para persistir el nuevo usuario
+        localStorage.setItem("userName", username);
+        localStorage.setItem("role", role);
+        // Redirigir según el rol
+        if (role === "administrador") {
+          window.location.href = "/administrador";
+        } else {
+          window.location.href = "/" + role;
+        }
+      });
+    </script>
+  </body>
+</html>

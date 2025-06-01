@@ -1,0 +1,159 @@
+/* public/styles/register.css */
+
+/* ===== Reseteo y tipografía ===== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #8bc34a, #aed581);
+  /* Mismo degradado que se usa en el login y resto del sistema */
+  color: #333333;
+}
+
+/* Contenedor que centra vertical y horizontalmente */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+/* Tarjeta blanca con sombra */
+.register-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  width: 360px;
+  max-width: 90%;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+/* Título de la tarjeta */
+.register-card h2 {
+  margin-bottom: 1.5rem;
+  color: #2e7d32; /* Verde oscuro */
+  font-size: 1.5rem;
+}
+
+/* Grupo de inputs estilizado similar al login */
+.input-group {
+  position: relative;
+  margin: 1.25rem 0;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #c8e6c9;
+  padding: 0.5rem 0;
+  font-size: 1rem;
+  background: transparent;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+/* Bordes al enfocar */
+.input-group input:focus,
+.input-group select:focus {
+  border-bottom-color: #4caf50;
+}
+
+/* Posición del label */
+.input-group label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0;
+  pointer-events: none;
+  font-size: 0.9rem;
+  color: #7cb342;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Si el campo está enfocado o no vacío, el label sube */
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label,
+.input-group select:focus + label,
+.input-group select:not([value=""]) + label {
+  top: -1rem;
+  font-size: 0.75rem;
+  color: #4caf50;
+}
+
+/* Para el select: hacer que el label flote igual */
+.select-group select {
+  /* Añadimos un placeholder vacío para que :placeholder-shown no aplique */
+  color: transparent;
+}
+
+.select-group select option {
+  color: #333333; /* Color real de las opciones */
+}
+
+.select-group select:focus {
+  color: #333333;
+}
+
+/* Botón principal de registro */
+.btn-register {
+  width: 100%;
+  padding: 0.7rem;
+  margin-top: 1.25rem;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.btn-register:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.btn-register:active {
+  transform: translateY(1px);
+}
+
+/* Enlaces debajo del botón */
+.links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.link-action {
+  font-size: 0.85rem;
+  color: #558b2f;
+  text-decoration: none;
+  transition: color 0.2s;
+  margin: 0 0.5rem;
+}
+
+.link-action:hover {
+  color: #33691e;
+}
+
+/* ===== Responsive (móviles) ===== */
+@media (max-width: 480px) {
+  .register-card {
+    width: 100%;
+    padding: 1.5rem;
+  }
+  .btn-register {
+    padding: 0.6rem;
+    font-size: 0.95rem;
+  }
+}

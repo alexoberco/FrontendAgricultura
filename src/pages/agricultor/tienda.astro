@@ -1,0 +1,65 @@
+---
+import Header from "../../components/Header.jsx";
+import { products } from "../../data/products.js";
+import AddToCartButton from "../../components/AddToCartButton.jsx";
+import ClientRouter from "astro/components/ClientRouter.astro";
+title: "Tienda";
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda – AgroPrecision</title>
+
+    <!-- CSS global y específico -->
+    <link rel="stylesheet" href="/styles/global.css" />
+    <link rel="stylesheet" href="/styles/estilos-agricultor.css" />
+
+    <!-- Vite/Astro Dev Toolbar -->
+    <script type="module" src="/@vite/client"></script>
+    <ClientRouter />
+  </head>
+
+  <body>
+    <!-- Header como isla React -->
+    <Header client:load role="agricultor" />
+
+    <!-- Validación de rol -->
+    <script>
+      (function () {
+        const role = localStorage.getItem("role");
+        if (!role || role !== "agricultor") {
+          window.location.href = "/login";
+        }
+      })();
+    </script>
+
+    <!-- Contenedor full‐width para la grilla de productos -->
+    <div class="products-container">
+      <h2 class="section-title">Catálogo de Productos</h2>
+      <div class="products-grid">
+        {products.map((prod) => (
+          <div class="product-card">
+            <img
+              src={prod.image}
+              alt={prod.name}
+              class="product-image"
+            />
+            <div class="product-info">
+              <h3>{prod.name}</h3>
+              <p class="description">{prod.description}</p>
+              <p class="price-stock">
+                <span class="price">$ {prod.price.toFixed(2)}</span>
+                <span class="stock">Stock: {prod.stock}</span>
+              </p>
+              <p class="rating">Valoración: {prod.rating} / 5</p>
+              <AddToCartButton product={prod} client:idle />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </body>
+</html>

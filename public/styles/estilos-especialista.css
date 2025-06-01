@@ -1,0 +1,165 @@
+/* ===== Contenedor principal con degradado verde ===== */
+.especialista-container {
+  width: 100vw;
+  padding: 2rem 1.5rem;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #8bc34a, #aed581);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Título centrado con verde oscuro */
+.especialista-container h2 {
+  font-size: 1.75rem;
+  color: #2e7d32; /* Verde oscuro */
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Tarjeta blanca para la lista de consultas */
+.especialista-card {
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  padding: 1.5rem;
+}
+
+/* Lista de consultas */
+.especialista-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.especialista-card li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background: #f1f8e9; /* Verde muy suave */
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition: background 0.2s;
+}
+
+.especialista-card li:hover {
+  background: #e8f5e9; /* Ligeramente más oscuro al pasar el mouse */
+}
+
+.especialista-card li p,
+.especialista-card li strong {
+  color: #333333;
+  margin: 0;
+}
+
+/* Badge “Respondida” */
+.badge {
+  background: #4caf50; /* Verde primario */
+  color: #ffffff;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Botón “Marcar como respondida” */
+.especialista-card .btn {
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.especialista-card .btn:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.especialista-card .btn:active {
+  transform: translateY(1px);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .especialista-card {
+    padding: 1rem;
+  }
+  .especialista-card li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .especialista-card .btn,
+  .badge {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.especialista-card .respuesta-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Textarea para responder */
+.especialista-card textarea.respuesta-text {
+  width: 100%;
+  min-height: 80px;
+  padding: 0.75rem;
+  border: 1px solid #c8e6c9;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+  background-color: #fafafa;
+  color: #333;
+  transition: border-color 0.2s;
+}
+
+.especialista-card textarea.respuesta-text:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+/* Botón “Enviar Respuesta” */
+.especialista-card button.enviar-respuesta {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #4caf50, #81c784);
+  color: #ffffff;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s ease-in-out;
+}
+
+.especialista-card button.enviar-respuesta:hover {
+  background: linear-gradient(135deg, #388e3c, #66bb6a);
+  transform: translateY(-2px);
+}
+
+.especialista-card button.enviar-respuesta:active {
+  transform: translateY(1px);
+}
+
+/* Mensaje “Sin respuestas aún” */
+.especialista-card .no-consultas {
+  text-align: center;
+  color: #555555;
+  font-style: italic;
+  margin: 1rem 0;
+}
