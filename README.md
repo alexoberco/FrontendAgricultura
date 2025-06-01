@@ -229,5 +229,3 @@ Los datos “dinámicos” (usuarios, productos, pedidos, logs, subsidios, foro)
   * `Recharts` como dependencia para gráficos en modo “client\:load”.
 
 ---
-
-¡Eso es todo! Con este README ya tienes toda la información necesaria para entender la estructura, estilos, dependencias y pasos para ejecutar **AgroPrecision** localmente. ¡Éxitos con tu proyecto!
